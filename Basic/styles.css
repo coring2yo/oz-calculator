@@ -1,0 +1,92 @@
+/* 기본 레이아웃 및 파스텔톤 디자인 */
+
+body {
+  background-color: #fff0f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#calculator {
+  width: 320px;
+  background: #ffe4f0;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(255, 182, 193, 0.4);
+  box-sizing: border-box;
+}
+
+#display {
+  background: #fff0f5;
+  color: #c71585;
+  font-size: 2.5rem;
+  text-align: right;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  height: 50px;
+  overflow-x: auto;
+  box-shadow: inset 0 0 10px #ffc0cb;
+  user-select: none;
+}
+
+#result {
+  min-height: 1.5em;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #cc3366;
+  text-align: right;
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+#history {
+  background: #fff5f7;
+  border: 1px solid #f8bbd0;
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-height: 140px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  color: #a83256;
+  margin-top: 15px;
+  box-shadow: 0 1px 3px rgba(255,182,193,0.2);
+  user-select: none;
+}
+
+#buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+#buttons button {
+  padding: 15px 0;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #f8bbd0;
+  color: #6a1b4d;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  box-shadow: 0 3px 7px rgba(248,187,208,0.6);
+}
+
+#buttons button:hover {
+  background-color: #e573a7;
+}
+
+#buttons button:active {
+  background-color: #ad1457;
+  color: white;
+  box-shadow: none;
+}
+
+#equals {
+  grid-column: span 4;
+}

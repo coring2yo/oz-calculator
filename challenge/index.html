@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>사칙연산 계산기 with 히스토리</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app-container">
+    <div id="calculator">
+      <div id="display">0</div>
+      <div id="buttons">
+        <button class="number-btn">7</button>
+        <button class="number-btn">8</button>
+        <button class="number-btn">9</button>
+        <button class="operator-btn" data-op="/">÷</button>
+
+        <button class="number-btn">4</button>
+        <button class="number-btn">5</button>
+        <button class="number-btn">6</button>
+        <button class="operator-btn" data-op="*">×</button>
+
+        <button class="number-btn">1</button>
+        <button class="number-btn">2</button>
+        <button class="number-btn">3</button>
+        <button class="operator-btn" data-op="-">−</button>
+
+        <button id="clear">C</button>
+        <button class="number-btn">0</button>
+        <button id="backspace">←</button>
+        <button class="operator-btn" data-op="+">+</button>
+
+        <button id="equals" style="grid-column: span 4;">=</button>
+      </div>
+      <!-- 계산 기록 -->
+      <div id="history-container">
+        <h2>계산 기록</h2>
+        <div id="history"></div>
+      </div>
+    </div>
+  </div>
+
+<script src="calculator.js"></script>
+</body>
+</html>

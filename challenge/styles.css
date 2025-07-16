@@ -1,0 +1,84 @@
+#app-container {
+  max-width: 400px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(100, 100, 150, 0.15);
+}
+
+#calculator {
+  background: #fff0f6;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(200, 150, 180, 0.15);
+}
+
+#display {
+  background: #fff;
+  border: 2px solid #dda0dd;
+  border-radius: 10px;
+  font-size: 2rem;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 15px;
+  margin-bottom: 20px;
+  color: #663366;
+  user-select: none;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+#buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+button {
+  font-size: 1.3rem;
+  padding: 15px 0;
+  border-radius: 10px;
+  border: none;
+  background: #dda0dd;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+button:hover {
+  background: #b07fb0;
+}
+button:active {
+  background: #8c6590;
+}
+
+#history-container {
+  margin-top: 25px;
+  background: #faf0fb;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(150, 100, 130, 0.1);
+}
+
+#history-container h2 {
+  color: #804080;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+#history {
+  font-size: 1rem;
+  color: #6b406b;
+  white-space: pre-line;
+  line-height: 1.5;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#display.error {
+  color: #d9534f;
+  font-weight: bold;
+}
