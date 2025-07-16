@@ -1,61 +1,29 @@
-/* 기본 레이아웃 및 파스텔톤 디자인 */
-
 body {
-  background-color: #fff0f5;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
+  padding: 40px;
+  background-color: #f0f4f8;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 #calculator {
-  width: 320px;
-  background: #ffe4f0;
-  border-radius: 15px;
+  background: white;
+  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 6px 12px rgba(255, 182, 193, 0.4);
-  box-sizing: border-box;
+  width: 320px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 #display {
-  background: #fff0f5;
-  color: #c71585;
-  font-size: 2.5rem;
-  text-align: right;
-  padding: 15px 20px;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  background: #eee;
+  font-size: 2rem;
   height: 50px;
-  overflow-x: auto;
-  box-shadow: inset 0 0 10px #ffc0cb;
-  user-select: none;
-}
-
-#result {
-  min-height: 1.5em;
+  line-height: 50px;
+  padding: 0 10px;
   margin-bottom: 15px;
-  font-weight: bold;
-  color: #cc3366;
-  text-align: right;
-  font-size: 1.1rem;
-  user-select: none;
-}
-
-#history {
-  background: #fff5f7;
-  border: 1px solid #f8bbd0;
-  padding: 10px 15px;
-  border-radius: 10px;
-  max-height: 140px;
-  overflow-y: auto;
-  font-size: 0.9rem;
-  color: #a83256;
-  margin-top: 15px;
-  box-shadow: 0 1px 3px rgba(255,182,193,0.2);
-  user-select: none;
+  border-radius: 5px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 #buttons {
@@ -64,29 +32,26 @@ body {
   gap: 10px;
 }
 
-#buttons button {
+button {
+  font-size: 1.2rem;
   padding: 15px 0;
-  font-size: 1.3rem;
   border: none;
-  border-radius: 10px;
-  background-color: #f8bbd0;
-  color: #6a1b4d;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  user-select: none;
-  box-shadow: 0 3px 7px rgba(248,187,208,0.6);
-}
-
-#buttons button:hover {
-  background-color: #e573a7;
-}
-
-#buttons button:active {
-  background-color: #ad1457;
+  border-radius: 5px;
+  background: #6495ed;
   color: white;
-  box-shadow: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
 }
 
-#equals {
-  grid-column: span 4;
+button:hover {
+  background: #4169e1;
+}
+
+#result {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  min-height: 25px;
+  color: #333;
+  word-wrap: break-word;
 }

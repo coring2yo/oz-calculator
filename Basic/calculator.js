@@ -1,111 +1,132 @@
-// 변수 선언
-var currentExpression = ""; // 전체 계산식 문자열
-let firstNumber = null;        
-let operator = null;           
-let waitingForSecond = false;
-
+// 변수 선언: var, let, const 각각 사용
+var firstNumber = null;
+let currentInput = "";
+const operators = ["+", "-", "*", "/"];
+let operator = null;
+const history = [];
 const display = document.getElementById("display");
+const resultDiv = document.getElementById("result");
 
-// 에러 표시 함수 (디스플레이에 출력)
+// 에러 출력 함수
 function showError(msg) {
-  display.textContent = "에러: " + msg;
-  display.style.color = "red";
+  resultDiv.textContent = "에러: " + msg;
+  resultDiv.style.color = "red";
 }
 
-// 에러 초기화
+// 에러 초기화 함수
 function clearError() {
-  display.style.color = "black";
+  resultDiv.textContent = "";
+  resultDiv.style.color = "black";
 }
 
-// 숫자 입력 처리
-function appendNumber(num) {
-  if (!/^[0-9]$/.test(num)) {
+// 숫자 입력 함수
+function appendNumber(number) {
+  clearError();
+  if (!/^[0-9]$/.test(number)) {
     showError("유효한 숫자를 입력하세요.");
     return;
   }
-  clearError();
-
-  currentExpression += num;
-  display.textContent = currentExpression;
+  currentInput += number;
+  display.textContent = currentInput;
 }
 
-// 연산자 설정
+// 연산자 설정 함수
 function setOperator(op) {
-  if (!["+", "-", "*", "/"].includes(op)) {
-    showError("유효한 연산자를 입력하세요.");
+  clearError();
+  if (!operators.includes(op)) {
+    showError("유효한 연산자가 아닙니다.");
     return;
   }
-  if (currentExpression === "" || /[+\-*/]$/.test(currentExpression)) {
-    // 계산식이 비었거나 끝이 이미 연산자이면 에러
+  if (currentInput === "") {
     showError("숫자를 먼저 입력하세요.");
     return;
   }
-  clearError();
-
-  currentExpression += op;
-  display.textContent = currentExpression;
-}
-
-// 계산 실행 (= 버튼)
-function calculate() {
-  if (currentExpression === "" || /[+\-*/]$/.test(currentExpression)) {
-    showError("계산할 수 없습니다.");
+  const num = Number(currentInput);
+  if (isNaN(num)) {
+    showError("유효한 숫자를 입력하세요.");
     return;
   }
-  clearError();
-
-  // 안전하게 eval 대신 계산 로직 작성 (단순 사칙연산)
-  try {
-    // 0으로 나누기 체크
-    if (currentExpression.includes("/0")) {
-      // 좀 더 정확하게 0으로 나누는 부분 체크해도 됨
-      showError("0으로 나눌 수 없습니다.");
-      return;
-    }
-
-    // eval은 위험하지만 여기선 간단히 사용 (정규식으로 숫자와 연산자만 허용 검증 후 사용 권장)
-    // 아래는 eval 쓰는 대신 Function 생성자 사용
-    const safeExpr = currentExpression.replace(/[^0-9+\-*/.]/g, "");
-    const func = new Function("return " + safeExpr);
-    const result = func();
-
-    currentExpression = String(result);
-    display.textContent = currentExpression;
-  } catch (e) {
-    showError("잘못된 계산식입니다.");
-  }
-}
-
-// 초기화 (C 버튼)
-function clearAll() {
-  currentExpression = "";
-  clearError();
+  firstNumber = num;
+  operator = op;
+  currentInput = "";
   display.textContent = "0";
 }
 
-// 백스페이스 (← 버튼)
-function backspace() {
-  if (currentExpression.length > 0) {
-    currentExpression = currentExpression.slice(0, -1);
-    display.textContent = currentExpression === "" ? "0" : currentExpression;
-  }
+// 계산 실행 함수
+function calculate() {
   clearError();
+  if (firstNumber === null || operator === null || currentInput === "") {
+    showError("계산할 수 없습니다.");
+    return;
+  }
+  let secondNumber = Number(currentInput);
+  if (isNaN(secondNumber)) {
+    showError("유효한 숫자를 입력하세요.");
+    return;
+  }
+  if (operator === "/" && secondNumber === 0) {
+    showError("0으로 나눌 수 없습니다.");
+    return;
+  }
+  let varResult;
+  switch (operator) {
+    case "+":
+      varResult = firstNumber + secondNumber;
+      break;
+    case "-":
+      varResult = firstNumber - secondNumber;
+      break;
+    case "*":
+      varResult = firstNumber * secondNumber;
+      break;
+    case "/":
+      varResult = firstNumber / secondNumber;
+      break;
+    default:
+      showError("알 수 없는 연산자입니다.");
+      return;
+  }
+  // 결과 출력
+  display.textContent = varResult;
+  resultDiv.textContent = "결과: " + varResult;
+  resultDiv.style.color = "black";
+
+  // 기록 저장
+  history.push({
+    firstNumber,
+    operator,
+    secondNumber,
+    result: varResult,
+  });
+  console.log(JSON.stringify(history));
+
+  // 초기화
+  firstNumber = null;
+  operator = null;
+  currentInput = "";
 }
 
-// 이벤트 리스너 연결
-document.querySelectorAll(".number-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    appendNumber(button.textContent);
-  });
-});
-document.querySelectorAll(".operator-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    setOperator(button.getAttribute("data-op"));
-  });
-});
-document.getElementById("clear").addEventListener("click", clearAll);
-document.getElementById("backspace").addEventListener("click", backspace);
-document.getElementById("equals").addEventListener("click", calculate);
+// 초기화 버튼
+function clearAll() {
+  clearError();
+  currentInput = "";
+  firstNumber = null;
+  operator = null;
+  display.textContent = "0";
+  resultDiv.textContent = "";
+}
 
-// 초기 화면 세팅
+// 이벤트 등록
+document.querySelectorAll(".number-btn").forEach(button => {
+  button.addEventListener("click", () => appendNumber(button.textContent));
+});
+
+document.querySelectorAll(".operator-btn").forEach(button => {
+  button.addEventListener("click", () => setOperator(button.getAttribute("data-op")));
+});
+
+document.getElementById("equals").addEventListener("click", calculate);
+document.getElementById("clear").addEventListener("click", clearAll);
+
+// 초기 디스플레이 세팅
 clearAll();
